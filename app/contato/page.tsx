@@ -16,7 +16,7 @@ export default function ContatoPage() {
     <section className="contact-form-panel"><div className="contact-form-content">
       <div className="contact-panel-top"><Link href="/" className="back-link">← Voltar para início</Link><a href="https://wa.me/5511982024537" target="_blank" rel="noopener">Precisa de ajuda?</a></div>
       <div className="eyebrow">Vamos mapear sua operação</div>
-      <h1>Transforme regras manuais em uma operação rastreável.</h1>
+      <h1>Suas regras financeiras, do cálculo à conciliação.</h1>
       <p className="contact-intro">Mostre como sua empresa calcula hoje comissões, splits, repasses ou remunerações variáveis. Vamos identificar onde reduzir tempo, retrabalho e risco.</p>
       <form className="contact-form contact-form-full" onSubmit={handleSubmit}>
         <div className="contact-fields">

@@ -21,8 +21,8 @@ export default function Page() {
         <div className="container hero-grid">
           <div className="hero-copy">
             <div className="eyebrow">Rastreabilidade financeira</div>
-            <h1>Da regra ao <span>pagamento.</span><br />Tudo rastreável.</h1>
-            <p className="lead">Automatize comissões, splits, repasses, bonificações e remunerações variáveis. Da origem da receita ao cálculo, aprovação, pagamento e conciliação — cada valor com sua regra, seu histórico e sua explicação.</p>
+            <h1>Automatize operações financeiras com <span>rastreabilidade.</span></h1>
+            <p className="lead">O FontCash aplica regras de comissão, split, repasse e remuneração variável, preservando a origem, o cálculo, as aprovações e a conciliação de cada valor.</p>
             <div className="hero-cta"><Link className="button" href="/contato">Quero automatizar minha operação <ArrowRight /></Link><Link className="text-link" href="/como-funciona">Conhecer o FontCash <ChevronRight /></Link></div>
             <div className="trustline"><span>Motor de regras</span><span>Processamento</span><span>Auditoria</span><span>Integrações</span></div>
           </div>
@@ -47,7 +47,7 @@ export default function Page() {
 
       <section className="section governance-section"><div className="container"><div className="section-head"><div><div className="eyebrow">06 · Transparência &amp; governança</div><h2>O cálculo precisa fechar.<br/><span>E precisa ser explicável.</span></h2></div><p className="lead">Gestor, financeiro e beneficiário trabalham sobre a mesma versão da verdade, com acesso compatível com cada perfil.</p></div><div className="governance-grid">{[['Histórico','Consulte períodos anteriores e preserve o contexto de cada fechamento.'],['Auditoria','Reconstrua o cálculo até sua origem e critérios aplicados.'],['Permissões','Separe o acesso conforme função, área, empresa ou beneficiário.'],['Versionamento','Mudanças de política não alteram retroativamente a história.'],['Integrações','Conecte o FontCash aos sistemas que já sustentam a operação.'],['Proteção de dados','Desenhe perfis e processos com atenção à segurança e à LGPD.']].map(([title,text])=><article key={title}><h3>{title}</h3><p>{text}</p></article>)}</div></div></section>
 
-      <section className="cta-section"><div className="container cta-inner"><div><div className="eyebrow">Pronto para avançar?</div><h2>Transforme sua operação em uma trilha confiável.</h2></div><Link className="button button-light" href="/contato">Falar com um especialista <ArrowRight /></Link></div></section>
+      <section className="cta-section"><div className="container cta-inner"><div><div className="eyebrow">Converse com nosso time</div><h2>Mapeie suas regras e identifique onde reduzir trabalho manual e risco operacional.</h2></div><Link className="button button-light" href="/contato">Falar com um especialista <ArrowRight /></Link></div></section>
     </main>
   )
 }

@@ -8,14 +8,6 @@ const selector = [
   '.inner-page .eyebrow',
   '.inner-page h1',
   '.page-lead',
-  '.card',
-  '.solution-card',
-  '.journey-grid article',
-  '.market-stats > div',
-  '.market-copy',
-  '.usecase',
-  '.governance-grid article',
-  '.evolution-item',
   '.detail-section',
   '.contact-image-panel',
   '.contact-form-content',
@@ -35,16 +27,17 @@ export default function MotionEffects() {
         element.style.setProperty('--motion-delay', `${Math.min(index % 6, 5) * 70}ms`)
       })
 
-      observer = new IntersectionObserver((entries) => {
+      const activeObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('motion-visible')
-            observer.unobserve(entry.target)
+            activeObserver.unobserve(entry.target)
           }
         })
       }, { threshold: 0.1, rootMargin: '0px 0px -7% 0px' })
 
-      elements.forEach((element) => observer.observe(element))
+      observer = activeObserver
+      elements.forEach((element) => activeObserver.observe(element))
     })
 
     return () => {
