@@ -4,7 +4,7 @@ const logo = "/images/logo-font-cash.png";
 
 export default function SiteFooter() {
   return (
-    <footer className="site-footer">
+    <footer className="site-footer" id="contato-footer">
       <div className="container footer-grid">
         <div className="footer-brand">
           <Link href="/" className="footer-logo" aria-label="FontCash início">

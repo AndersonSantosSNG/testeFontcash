@@ -41,7 +41,7 @@ export default function SiteHeader() {
           <Link href="/mercado" onClick={closeMenu}>
             Mercado
           </Link>
-          <Link href="/contato" onClick={closeMenu}>
+          <Link href="#contato-footer" onClick={closeMenu}>
             Contato
           </Link>
           <Link
