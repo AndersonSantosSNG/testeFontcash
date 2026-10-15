@@ -8,13 +8,13 @@ export default function SiteFooter() {
       <div className="container footer-grid">
         <div className="footer-brand">
           <Link href="/" className="footer-logo" aria-label="FontCash início">
-            <img src={logo} alt="SNG FontCash" />
+            <img src={logo} alt="SNG FontCash" width="2048" height="341" />
           </Link>
           <p>Tecnologia para transformar regras financeiras em processos claros, seguros e rastreáveis.</p>
           <div className="syner-signature">
             <div className="syner-label">Um produto da</div>
             <a className="syner-logo-box" href="https://sng.com.br/site/index.php" target="_blank" rel="noopener" aria-label="Conheça a SNG Syner Group">
-              <img className="footer-sng-logo" src="/images/logo-sng-synergroup.png" alt="SNG Syner Group" />
+              <img className="footer-sng-logo" src="/images/logo-sng-synergroup.png" alt="SNG Syner Group" width="1772" height="355" />
             </a>
             <p className="syner-copy"><strong>FontCash é um produto da SNG Syner Group.</strong><br />Parte do ecossistema de soluções SNG para rastreabilidade, observabilidade e inteligência aplicada aos processos empresariais.</p>
           </div>

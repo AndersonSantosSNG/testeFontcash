@@ -416,3 +416,7 @@ body{font-family:Inter,"Segoe UI",Arial,sans-serif;background:#fff;padding-top:7
   .syner-signature{padding:15px;margin:16px 0 20px}.footer-sng-logo{width:155px}
   .footer-links{grid-template-columns:1fr 1fr}
 }
+
+/* Stable first paint: no entrance animation or post-load layout movement. */
+.site-header{animation:none}
+.motion-item,.motion-item.motion-visible{opacity:1;transform:none;transition:none}

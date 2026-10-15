@@ -13,7 +13,7 @@ export default function SiteHeader() {
   return (
     <header className="site-header">
       <div className="container nav-wrap">
-        <Link href="/" className="brand" aria-label="FontCash início" onClick={closeMenu}><img src={logo} alt="SNG FontCash" /></Link>
+        <Link href="/" className="brand" aria-label="FontCash início" onClick={closeMenu}><img src={logo} alt="SNG FontCash" width="2048" height="341" /></Link>
         <button className="menu-button" onClick={() => setOpen(!open)} aria-label={open ? 'Fechar menu' : 'Abrir menu'}>{open ? <X /> : <Menu />}</button>
         <nav className={open ? 'main-nav open' : 'main-nav'} aria-label="Navegação principal">
           <Link href="/solucoes" onClick={closeMenu}>Soluções</Link>
