@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { ArrowRight, CheckCircle2, ChevronRight, GitBranch, Landmark, ShieldCheck } from 'lucide-react'
 
-const logo = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-FMIA1NxI8rfPyiKfAVGcMBBdF7anzu.png'
+const logo = '/images/logo-font-cash.png'
 
 const problems = [
   ['Regras espalhadas', 'Políticas comerciais em planilhas, documentos, e-mails ou no conhecimento de poucas pessoas.'],

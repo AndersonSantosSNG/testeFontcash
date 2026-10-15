@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
 
-const logo = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-FMIA1NxI8rfPyiKfAVGcMBBdF7anzu.png'
+const logo = '/images/logo-font-cash.png'
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false)

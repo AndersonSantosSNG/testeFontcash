@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-const logo = 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-FMIA1NxI8rfPyiKfAVGcMBBdF7anzu.png'
+const logo = '/images/logo-font-cash.png'
 
 export default function SiteFooter() {
   return (
@@ -11,6 +11,13 @@ export default function SiteFooter() {
             <img src={logo} alt="SNG FontCash" />
           </Link>
           <p>Tecnologia para transformar regras financeiras em processos claros, seguros e rastreáveis.</p>
+          <div className="syner-signature">
+            <div className="syner-label">Um produto da</div>
+            <a className="syner-logo-box" href="https://sng.com.br/site/index.php" target="_blank" rel="noopener" aria-label="Conheça a SNG Syner Group">
+              <img className="footer-sng-logo" src="/images/logo-sng-synergroup.png" alt="SNG Syner Group" />
+            </a>
+            <p className="syner-copy"><strong>FontCash é um produto da SNG Syner Group.</strong><br />Parte do ecossistema de soluções SNG para rastreabilidade, observabilidade e inteligência aplicada aos processos empresariais.</p>
+          </div>
           <div className="footer-links">
             <Link href="/solucoes">Soluções</Link>
             <Link href="/como-funciona">Como funciona</Link>
