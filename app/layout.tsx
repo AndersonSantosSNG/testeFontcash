@@ -11,4 +11,4 @@ export const metadata: Metadata = {
   icons: { icon: '/favicon.ico' },
 }
 export const viewport: Viewport = { colorScheme: 'light', themeColor: '#092d3e' }
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) { return <html lang="pt-BR"><body><SiteHeader />{children}<SiteFooter />{process.env.NODE_ENV === 'production' && <Analytics />}</body></html> }
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) { return <html lang="pt-BR"><body style={{ fontFamily: 'Arial, Helvetica, sans-serif' }}><SiteHeader />{children}<SiteFooter />{process.env.NODE_ENV === 'production' && <Analytics />}</body></html> }
