@@ -323,3 +323,71 @@ body{font-family:Inter,"Segoe UI",Arial,sans-serif;background:#fff;padding-top:7
   .syner-signature{margin:24px 0;padding:20px}
   .footer-brand .syner-copy{margin:15px 0 0}
 }
+
+/* Comprehensive responsive pass. */
+@media (max-width:1024px){
+  .container{width:min(100% - 40px,920px)}
+  .main-nav{gap:16px}.main-nav a{font-size:12px}.nav-login{margin-left:4px}
+  .hero-grid{gap:44px}.hero h1{font-size:clamp(42px,5.6vw,58px)}
+  .trace-card{padding:20px}.flow-step{padding:12px 0}
+  .section-head{gap:38px}.rules-layout{gap:48px}
+  .statement-showcase{gap:42px}.statement-showcase>img{height:350px}
+  .footer-grid{grid-template-columns:minmax(0,1fr) 340px;gap:50px}
+  .solution-grid{grid-template-columns:1fr 1fr}
+  .solution-card:last-child{grid-column:1/-1;border-left:0}
+  .solution-example{gap:46px}
+}
+
+@media (max-width:900px){
+  body{padding-top:70px}
+  .site-header{height:70px}
+  .brand img{width:164px}
+  .menu-button{display:block;color:var(--dark);padding:8px;cursor:pointer}
+  .main-nav{display:none;position:absolute;z-index:110;top:70px;left:0;right:0;background:#fff;padding:22px max(20px,calc((100vw - 860px)/2));flex-direction:column;align-items:stretch;border-bottom:1px solid var(--line);box-shadow:0 16px 32px #092d3e12}
+  .main-nav.open{display:flex}.main-nav a{font-size:14px;padding:5px 0}.main-nav a::after{display:none}.nav-login{margin:0}
+  .hero{min-height:auto;padding:58px 0 66px}.hero-grid,.rules-layout,.statement-showcase,.evolution-grid{grid-template-columns:1fr}
+  .hero-copy{max-width:720px}.trace-card{animation:none}
+  .proof-grid{grid-template-columns:repeat(2,1fr)}
+  .proof-grid div:nth-child(2){border-right:0}.proof-grid div:nth-child(3){padding-left:0}
+  .section-head{grid-template-columns:1fr;gap:20px}
+  .statement-showcase>img{width:100%;height:auto;aspect-ratio:16/9}
+  .rule-zone,.governance-section{background-image:none}
+  .rules-layout{gap:42px}.rule-builder{max-width:720px;width:100%}
+  .footer-grid{grid-template-columns:1fr;gap:44px}
+  .footer-contact{max-width:520px}
+  .contact-split-page{height:auto;min-height:calc(100dvh - 70px);flex:none;overflow:visible}
+  .contact-form-panel{overflow:visible}
+  .solution-example,.process-proof{grid-template-columns:1fr}
+}
+
+@media (max-width:700px){
+  .container{width:calc(100% - 32px)}
+  .hero h1{font-size:clamp(38px,11vw,48px)}
+  .hero-cta{align-items:stretch}.hero-cta .button,.hero-cta .text-link{width:100%}.hero-cta .text-link{padding:8px 0}
+  .trustline{gap:12px 16px;margin-top:32px}.trustline span{font-size:11px}
+  .trace-card{overflow:hidden}.flow-step{grid-template-columns:34px minmax(0,1fr)}.flow-step>span{display:none}
+  .section,.statement-section{padding:60px 0}.section h2,.statement h2{font-size:clamp(32px,9vw,42px)}
+  .proof-grid{gap:0}.proof-grid div{padding:18px 14px 18px 0}.proof-grid div:nth-child(even){padding-left:14px}
+  .proof b{font-size:21px}
+  .solution-grid{grid-template-columns:1fr}.solution-card:last-child{grid-column:auto}.solution-card+ .solution-card{border-left:0}
+  .detail-section{margin-top:58px;padding:30px 24px;gap:28px}
+  .market-copy{padding:30px 24px}.market-copy h2{font-size:29px}
+  .contact-image-panel{min-height:260px}
+  .contact-form-panel{padding:34px 20px 50px}.contact-panel-top{gap:14px}
+  .contact-form-content>h1{font-size:clamp(34px,10vw,43px)}
+  .contact-fields{grid-template-columns:1fr}.contact-form-full .field-full{grid-column:auto}
+  .process-phase article{grid-template-columns:1fr;gap:8px}.process-phase article>span{margin-bottom:3px}
+  .example-trace>div{grid-template-columns:1fr;gap:5px}
+  .footer-links{display:grid;grid-template-columns:1fr 1fr}.footer-logo img{width:210px}
+}
+
+@media (max-width:420px){
+  .container{width:calc(100% - 24px)}
+  .hero{padding:48px 0 56px}.hero h1,.inner-page h1{font-size:36px}
+  .button{width:100%}.cta-inner .button{width:100%}
+  .proof-grid{grid-template-columns:1fr}.proof-grid div,.proof-grid div:nth-child(even),.proof-grid div:nth-child(3){padding:16px 0;border-right:0;border-bottom:1px solid var(--line)}
+  .proof-grid div:last-child{border-bottom:0}
+  .rule-builder{padding:18px}.rule-builder p{align-items:flex-start}.rule-result{gap:16px;flex-direction:column}
+  .cta-inner{align-items:stretch}.footer-grid{gap:36px}.syner-signature{padding:17px}.footer-sng-logo{width:175px}
+  .contact-panel-top{align-items:flex-start;flex-direction:column}.contact-panel-top>a:last-child{align-self:flex-start}
+}
