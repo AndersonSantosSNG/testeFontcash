@@ -88,3 +88,121 @@ body>main{flex:1;width:100%}
   .inner-page:has(.contact-layout){min-height:auto;padding:42px 0 72px}
   .inner-page:has(.contact-layout) h1{font-size:clamp(40px,12vw,54px)}
 }
+
+/* Contact: editorial split layout inspired by the supplied reference. */
+.contact-split-page{display:grid;grid-template-columns:minmax(360px,43%) minmax(0,57%);height:calc(100dvh - 82px);flex:0 0 calc(100dvh - 82px);background:#fff;overflow:hidden}
+.contact-image-panel{background:url('/images/fontcash/form.jpeg') center center/cover no-repeat;min-height:100%}
+.contact-form-panel{display:flex;justify-content:center;padding:30px clamp(32px,5vw,92px) 34px;background:#fff;overflow-y:auto}
+.contact-form-content{width:min(760px,100%)}
+.contact-panel-top{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:22px}
+.contact-panel-top .back-link{margin:0}
+.contact-panel-top>a:last-child{color:var(--orange);font-size:13px;font-weight:800}
+.contact-form-content>.eyebrow{margin-bottom:12px}
+.contact-form-content>h1{font-size:clamp(36px,3.25vw,54px);line-height:1.02;letter-spacing:-.05em;margin:0;max-width:720px}
+.contact-intro{color:var(--muted);font-size:15px;line-height:1.45;margin:13px 0 18px;max-width:680px}
+.contact-form.contact-form-full{border:0;border-radius:0;padding:0;box-shadow:none;display:block}
+.contact-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 12px}
+.contact-form-full label{display:grid;gap:7px;font-size:12px;font-weight:800}
+.contact-form-full input,.contact-form-full textarea,.contact-form-full select{width:100%;font:inherit;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:11px 12px;background:#f5f8f7;outline:none}
+.contact-form-full input:focus,.contact-form-full textarea:focus,.contact-form-full select:focus{border-color:var(--orange);box-shadow:0 0 0 3px #ff6b0018}
+.contact-form-full textarea{resize:vertical;min-height:82px}
+.contact-form-full .field-full{grid-column:1/-1}
+.contact-form-full>.button{width:100%;margin-top:18px}
+.contact-form-full .privacy{color:var(--muted);font-size:11px;line-height:1.45;margin:11px 0 0;text-align:center}
+
+@media (max-width:900px){
+  .contact-split-page{grid-template-columns:1fr;height:auto;min-height:calc(100dvh - 70px);flex:none;overflow:visible}
+  .contact-image-panel{min-height:38vh;background-position:center 42%}
+  .contact-form-panel{padding:42px 24px 60px;overflow:visible}
+}
+@media (max-width:560px){
+  .contact-image-panel{min-height:30vh}
+  .contact-fields{grid-template-columns:1fr}
+  .contact-form-full .field-full{grid-column:auto}
+  .contact-panel-top{margin-bottom:25px}
+  .contact-form-content>h1{font-size:40px}
+}
+
+/* Additional content sourced from the supplied FontCash HTML. */
+.applications-section{background:#fff}
+.usecase-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.usecase{padding:28px;min-height:190px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.usecase>span{color:var(--orange);font-size:11px;font-weight:800;letter-spacing:.12em}
+.usecase h3{font-size:19px;margin:28px 0 10px}
+.usecase p,.governance-grid p{color:var(--muted);line-height:1.55;margin:0}
+.finance-evolution{background:var(--dark);color:#fff}
+.evolution-grid{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center}
+.evolution-rail{display:grid}
+.evolution-item{position:relative;display:flex;gap:18px;padding:22px 0;border-bottom:1px solid #315665}
+.evolution-item:last-child{border-bottom:0}
+.evolution-item i{width:14px;height:14px;flex:0 0 14px;margin-top:3px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 6px #ff6b0022}
+.evolution-item small{display:block;color:#9db9bd;margin-top:7px}
+.governance-section{background:var(--soft)}
+.governance-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.governance-grid article{background:#fff;border:1px solid var(--line);border-radius:12px;padding:26px}
+.governance-grid h3{margin:0 0 11px;font-size:19px}
+@media (max-width:900px){.usecase-grid{grid-template-columns:repeat(2,1fr)}.evolution-grid{grid-template-columns:1fr;gap:45px}.governance-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.usecase-grid,.governance-grid{grid-template-columns:1fr}.usecase{min-height:auto}}
+
+/* Fit the complete contact form below the fixed header. */
+@media (min-width:901px) and (max-height:1000px){
+  .contact-form-panel{padding-top:18px;padding-bottom:18px}
+  .contact-panel-top{margin-bottom:14px}
+  .contact-form-content>.eyebrow{margin-bottom:8px}
+  .contact-form-content>h1{font-size:clamp(36px,2.7vw,46px);line-height:1}
+  .contact-intro{font-size:14px;line-height:1.35;margin:10px 0 13px}
+  .contact-fields{gap:9px 12px}
+  .contact-form-full label{gap:4px}
+  .contact-form-full input,.contact-form-full textarea,.contact-form-full select{padding:9px 11px}
+  .contact-form-full textarea{min-height:62px}
+  .contact-form-full>.button{padding:12px 20px;margin-top:12px}
+  .contact-form-full .privacy{margin-top:7px;line-height:1.3}
+}
+
+/* Generated FontCash imagery. */
+.statement-showcase{display:grid;grid-template-columns:minmax(0,.9fr) minmax(420px,1.1fr);gap:70px;align-items:center}
+.statement-showcase .statement{margin-left:0}
+.statement-showcase>img{display:block;width:100%;height:430px;object-fit:cover;object-position:right center;border-radius:18px;box-shadow:0 22px 55px #173e4b20}
+.rule-zone{background-image:linear-gradient(90deg,rgba(247,250,248,.98) 0%,rgba(247,250,248,.94) 42%,rgba(247,250,248,.82) 72%,rgba(247,250,248,.76) 100%),url('/images/fontcash/motor-de-regras.png');background-position:center;background-size:cover;background-repeat:no-repeat}
+.finance-evolution{background-image:linear-gradient(90deg,rgba(9,45,62,.98),rgba(9,45,62,.83)),url('/images/fontcash/integracoes-open-finance.png');background-position:center;background-size:cover;background-repeat:no-repeat}
+.governance-section{background-image:linear-gradient(90deg,rgba(234,243,244,.97) 0%,rgba(234,243,244,.89) 55%,rgba(234,243,244,.78) 100%),url('/images/fontcash/governanca-auditoria.png');background-position:center;background-size:cover;background-repeat:no-repeat}
+@media (max-width:900px){
+  .statement-showcase{grid-template-columns:1fr;gap:38px}
+  .statement-showcase>img{height:320px}
+  .rule-zone,.governance-section{background-image:none}
+}
+
+/* Global motion system. */
+.motion-item{opacity:0;transform:translateY(34px);transition:opacity .72s cubic-bezier(.22,1,.36,1) var(--motion-delay,0ms),transform .72s cubic-bezier(.22,1,.36,1) var(--motion-delay,0ms)}
+.motion-item.motion-visible{opacity:1;transform:translateY(0)}
+.site-header{animation:header-enter .65s cubic-bezier(.22,1,.36,1) both}
+.brand img{transition:transform .35s ease,filter .35s ease}
+.brand:hover img{transform:scale(1.035)}
+.main-nav a:not(.button){position:relative;transition:color .25s ease,transform .25s ease}
+.main-nav a:not(.button):hover{transform:translateY(-2px)}
+.main-nav a:not(.button)::after{content:'';position:absolute;left:0;right:100%;bottom:-7px;height:2px;border-radius:2px;background:var(--orange);transition:right .3s ease}
+.main-nav a:not(.button):hover::after{right:0}
+.button{position:relative;overflow:hidden;transition:transform .25s ease,box-shadow .25s ease,background-color .25s ease}
+.button::before{content:'';position:absolute;inset:0;transform:translateX(-110%) skewX(-18deg);background:linear-gradient(90deg,transparent,#fff5,transparent);transition:transform .55s ease}
+.button:hover{transform:translateY(-3px);box-shadow:0 12px 28px #ff6b0035}
+.button:hover::before{transform:translateX(110%) skewX(-18deg)}
+.card,.solution-card,.market-stats>div,.usecase,.governance-grid article{transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s ease,border-color .35s ease}
+.card:hover,.solution-card:hover,.market-stats>div:hover,.usecase:hover,.governance-grid article:hover{transform:translateY(-8px);box-shadow:0 18px 45px #173e4b16;border-color:#f1a66f}
+.trace-card{animation:card-float 5s ease-in-out infinite}
+.flow-step.active .flow-n{animation:active-pulse 1.8s ease-in-out infinite}
+.statement-showcase>img,.rules-photo,.governance-image,.evolution-image,.contact-image-panel{transition:transform .8s cubic-bezier(.22,1,.36,1),filter .5s ease}
+.statement-showcase>img:hover{transform:scale(1.018);filter:saturate(1.08)}
+.evolution-item i{animation:node-pulse 2.4s ease-in-out infinite}
+.evolution-item:nth-child(2) i{animation-delay:.3s}.evolution-item:nth-child(3) i{animation-delay:.6s}.evolution-item:nth-child(4) i{animation-delay:.9s}
+.foot-contact-box a{transition:color .2s ease,transform .25s ease}
+.foot-contact-box a:hover{transform:translateX(5px)}
+@keyframes header-enter{from{opacity:0;transform:translateY(-100%)}to{opacity:1;transform:translateY(0)}}
+@keyframes card-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes active-pulse{0%,100%{box-shadow:0 0 0 0 #ff6b0055}50%{box-shadow:0 0 0 8px #ff6b0000}}
+@keyframes node-pulse{0%,100%{box-shadow:0 0 0 6px #ff6b0022}50%{box-shadow:0 0 0 12px #ff6b0008}}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .motion-item{opacity:1;transform:none}
+}
