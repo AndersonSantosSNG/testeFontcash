@@ -126,6 +126,7 @@ export default function Page() {
   const physicalTestimonialIndex = useRef(testimonials.length);
   const carouselResetTimer = useRef<number | undefined>(undefined);
   const [testimonialIndex, setTestimonialIndex] = useState(0);
+  const [activeFlowStep, setActiveFlowStep] = useState(0);
 
   const centerCard = useCallback(
     (physicalIndex: number, behavior: ScrollBehavior = "smooth") => {
@@ -197,6 +198,18 @@ export default function Page() {
     };
   }, [centerCard, moveCarousel]);
 
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = window.setInterval(
+      () =>
+        setActiveFlowStep((current) =>
+          current === financialFlow.length - 1 ? 0 : current + 1,
+        ),
+      1500,
+    );
+    return () => window.clearInterval(timer);
+  }, []);
+
   return (
     <main className="site-shell">
       <section className="hero" id="inicio">
@@ -239,8 +252,11 @@ export default function Page() {
                 const Icon = item.icon;
                 return (
                   <div
-                    className={i === 1 ? "flow-step active" : "flow-step"}
+                    className={
+                      i === activeFlowStep ? "flow-step active" : "flow-step"
+                    }
                     key={item.title}
+                    aria-current={i === activeFlowStep ? "step" : undefined}
                   >
                     <div className="flow-icon" aria-hidden="true">
                       <Icon />
@@ -249,7 +265,9 @@ export default function Page() {
                       <strong>{item.title}</strong>
                       <small>{item.description}</small>
                     </div>
-                    <span>{item.status}</span>
+                    <span>
+                      {i === activeFlowStep ? "processando" : item.status}
+                    </span>
                   </div>
                 );
               })}

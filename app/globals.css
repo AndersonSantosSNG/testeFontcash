@@ -3145,6 +3145,7 @@ body {
 .trace-card .flow-step.active .flow-icon {
   color: #fff;
   background: var(--orange);
+  animation: flow-icon-pulse 1.15s ease-in-out infinite;
 }
 .trace-card .flow-icon svg {
   width: 15px;
@@ -3169,6 +3170,22 @@ body {
   font-weight: 400;
   letter-spacing: 0;
   text-transform: none;
+  transition: color 0.25s ease;
+}
+.trace-card .flow-step.active > span {
+  color: #ff9b52;
+  font-weight: 700;
+}
+@keyframes flow-icon-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(244, 104, 11, 0.42);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 7px rgba(244, 104, 11, 0);
+    transform: scale(1.06);
+  }
 }
 
 @media (max-width: 1024px) {
