@@ -4,12 +4,17 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
+  BadgeCheck,
+  Calculator,
   CheckCircle2,
   ChevronLeft,
   ChevronRight,
+  CreditCard,
+  Database,
   GitBranch,
   Landmark,
   Quote,
+  RefreshCw,
   ShieldCheck,
   Star,
 } from "lucide-react";
@@ -75,6 +80,45 @@ const carouselTestimonials = [
   ...testimonials,
   ...testimonials,
   ...testimonials,
+];
+
+const financialFlow = [
+  {
+    title: "Origem",
+    description: "Venda, evento ou receita entra no fluxo.",
+    status: "recebido",
+    icon: Database,
+  },
+  {
+    title: "Regra",
+    description: "A política comercial aplicável é identificada.",
+    status: "identificada",
+    icon: GitBranch,
+  },
+  {
+    title: "Cálculo & split",
+    description: "Os valores são distribuídos por beneficiário.",
+    status: "calculado",
+    icon: Calculator,
+  },
+  {
+    title: "Aprovação",
+    description: "O resultado é validado antes do fechamento.",
+    status: "aprovado",
+    icon: BadgeCheck,
+  },
+  {
+    title: "Pagamento",
+    description: "A operação financeira é preparada e processada.",
+    status: "processado",
+    icon: CreditCard,
+  },
+  {
+    title: "Conciliação",
+    description: "Previsto e realizado permanecem rastreáveis.",
+    status: "rastreado",
+    icon: RefreshCw,
+  },
 ];
 
 export default function Page() {
@@ -191,26 +235,21 @@ export default function Page() {
               <div className="live">OPERANDO</div>
             </div>
             <div className="flow">
-              {[
-                "Origem|Venda, evento ou receita|recebido",
-                "Regra|Política comercial aplicável|identificada",
-                "Cálculo & split|Valores por beneficiário|calculado",
-                "Aprovação|Validação antes do fechamento|aprovado",
-                "Pagamento|Preparação da operação financeira|processado",
-                "Conciliação|Previsto x realizado|rastreado",
-              ].map((item, i) => {
-                const [title, desc, status] = item.split("|");
+              {financialFlow.map((item, i) => {
+                const Icon = item.icon;
                 return (
                   <div
                     className={i === 1 ? "flow-step active" : "flow-step"}
-                    key={title}
+                    key={item.title}
                   >
-                    <div className="flow-n">0{i + 1}</div>
-                    <div>
-                      <strong>{title}</strong>
-                      <small>{desc}</small>
+                    <div className="flow-icon" aria-hidden="true">
+                      <Icon />
                     </div>
-                    <span>{status}</span>
+                    <div>
+                      <strong>{item.title}</strong>
+                      <small>{item.description}</small>
+                    </div>
+                    <span>{item.status}</span>
                   </div>
                 );
               })}
@@ -278,10 +317,17 @@ export default function Page() {
           </div>
           <div className="cards">
             {problems.map(([title, text]) => (
-              <article className="card" key={title}>
-                <h3>{title}</h3>
-                <p>{text}</p>
-              </article>
+              <details className="card problem-toggle" key={title}>
+                <summary>
+                  <h3>{title}</h3>
+                  <span aria-hidden="true" />
+                </summary>
+                <div className="problem-toggle-content">
+                  <div>
+                    <p>{text}</p>
+                  </div>
+                </div>
+              </details>
             ))}
           </div>
         </div>
