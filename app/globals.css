@@ -2993,6 +2993,15 @@ body {
   border-color: #b9cac8;
   transform: translateY(-3px);
 }
+.testimonial-card.active {
+  border-color: var(--orange);
+  box-shadow:
+    0 0 0 1px var(--orange),
+    0 14px 34px rgba(9, 45, 62, 0.1);
+}
+.testimonial-card.active .testimonial-avatar {
+  background: var(--orange);
+}
 .testimonial-topline {
   display: grid;
   grid-template-columns: 46px 1fr auto;

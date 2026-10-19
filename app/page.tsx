@@ -157,6 +157,7 @@ export default function Page() {
   const physicalTestimonialIndex = useRef(testimonials.length);
   const carouselResetTimer = useRef<number | undefined>(undefined);
   const [testimonialIndex, setTestimonialIndex] = useState(0);
+  const [carouselTimerReset, setCarouselTimerReset] = useState(0);
   const [activeFlowStep, setActiveFlowStep] = useState(0);
   const [activeProductScreen, setActiveProductScreen] = useState(0);
   const [productScreensReady, setProductScreensReady] = useState(false);
@@ -168,8 +169,19 @@ export default function Page() {
       const card = track?.children[physicalIndex] as HTMLElement | undefined;
       if (!track || !card) return;
 
+      const left = card.offsetLeft + card.offsetWidth / 2 - track.clientWidth / 2;
+
+      if (behavior === "auto") {
+        track.style.scrollBehavior = "auto";
+        track.scrollLeft = left;
+        window.requestAnimationFrame(() =>
+          track.style.removeProperty("scroll-behavior"),
+        );
+        return;
+      }
+
       track.scrollTo({
-        left: card.offsetLeft + card.offsetWidth / 2 - track.clientWidth / 2,
+        left,
         behavior,
       });
     },
@@ -208,6 +220,12 @@ export default function Page() {
     physicalTestimonialIndex.current = nextPhysical;
     setTestimonialIndex(nextIndex);
     centerCard(nextPhysical);
+    setCarouselTimerReset((reset) => reset + 1);
+  };
+
+  const navigateCarousel = (direction: -1 | 1) => {
+    moveCarousel(direction);
+    setCarouselTimerReset((reset) => reset + 1);
   };
 
   useEffect(() => {
@@ -217,20 +235,18 @@ export default function Page() {
     const handleResize = () => centerCard(physicalTestimonialIndex.current, "auto");
     window.addEventListener("resize", handleResize);
 
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    const timer = reduceMotion
-      ? undefined
-      : window.setInterval(() => moveCarousel(1), 5500);
-
     return () => {
       window.cancelAnimationFrame(initialFrame);
       window.removeEventListener("resize", handleResize);
       window.clearTimeout(carouselResetTimer.current);
-      if (timer) window.clearInterval(timer);
     };
-  }, [centerCard, moveCarousel]);
+  }, [centerCard]);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = window.setInterval(() => moveCarousel(1), 5500);
+    return () => window.clearInterval(timer);
+  }, [moveCarousel, carouselTimerReset]);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -239,7 +255,7 @@ export default function Page() {
         setActiveFlowStep((current) =>
           current === financialFlow.length - 1 ? 0 : current + 1,
         ),
-      2500,
+      4500,
     );
     return () => window.clearInterval(timer);
   }, []);
@@ -520,14 +536,14 @@ export default function Page() {
           <div className="carousel-controls" aria-label="Controles do carrossel">
             <button
               type="button"
-              onClick={() => moveCarousel(-1)}
+              onClick={() => navigateCarousel(-1)}
               aria-label="Depoimento anterior"
             >
               <ChevronLeft />
             </button>
             <button
               type="button"
-              onClick={() => moveCarousel(1)}
+              onClick={() => navigateCarousel(1)}
               aria-label="Próximo depoimento"
             >
               <ChevronRight />
@@ -541,7 +557,17 @@ export default function Page() {
             {carouselTestimonials.map((testimonial, index) => {
               const logicalIndex = index % testimonials.length;
               return (
-              <article className="testimonial-card" key={`${testimonial.role}-${index}`}>
+              <article
+                className={
+                  logicalIndex === testimonialIndex
+                    ? "testimonial-card active"
+                    : "testimonial-card"
+                }
+                aria-current={
+                  logicalIndex === testimonialIndex ? "true" : undefined
+                }
+                key={`${testimonial.role}-${index}`}
+              >
                 <div className="testimonial-topline">
                   <div className="testimonial-avatar" aria-hidden="true">
                     {testimonial.role.charAt(0)}
