@@ -205,7 +205,7 @@ export default function Page() {
         setActiveFlowStep((current) =>
           current === financialFlow.length - 1 ? 0 : current + 1,
         ),
-      1500,
+      2500,
     );
     return () => window.clearInterval(timer);
   }, []);
