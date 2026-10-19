@@ -121,12 +121,45 @@ const financialFlow = [
   },
 ];
 
+const productScreens = [
+  {
+    title: "Dashboard",
+    image: "/images/fontcash/fontcash1.png",
+    alt: "Dashboard do FontCash com filtros, indicadores e histórico de comissões",
+    description:
+      "Consulte períodos, acompanhe os dados processados e visualize o histórico de comissões em um único painel.",
+  },
+  {
+    title: "Políticas",
+    image: "/images/fontcash/fontcash2.png",
+    alt: "Tela de políticas comerciais do FontCash",
+    description:
+      "Organize políticas comerciais, prioridades e tipos de processamento em uma visão centralizada.",
+  },
+  {
+    title: "Usuários",
+    image: "/images/fontcash/fontcash3.png",
+    alt: "Tela de gestão de usuários do FontCash",
+    description:
+      "Administre usuários e acessos da operação com pesquisa e ações reunidas no mesmo ambiente.",
+  },
+  {
+    title: "Processos",
+    image: "/images/fontcash/fontcash4.png",
+    alt: "Tela de controle de processos do FontCash",
+    description:
+      "Acompanhe competências, responsáveis e status ao longo do processamento financeiro.",
+  },
+];
+
 export default function Page() {
   const testimonialsTrack = useRef<HTMLDivElement>(null);
   const physicalTestimonialIndex = useRef(testimonials.length);
   const carouselResetTimer = useRef<number | undefined>(undefined);
   const [testimonialIndex, setTestimonialIndex] = useState(0);
   const [activeFlowStep, setActiveFlowStep] = useState(0);
+  const [activeProductScreen, setActiveProductScreen] = useState(0);
+  const productScreen = productScreens[activeProductScreen];
 
   const centerCard = useCallback(
     (physicalIndex: number, behavior: ScrollBehavior = "smooth") => {
@@ -373,6 +406,63 @@ export default function Page() {
             src="/images/fontcash/rastreabilidade-financeira.png"
             alt="Equipe acompanhando um fluxo financeiro rastreável"
           />
+        </div>
+      </section>
+
+      <section className="product-preview-section" aria-labelledby="product-preview-title">
+        <div className="container product-preview">
+          <div className="product-gallery">
+            <div
+              className="product-screen"
+              id="product-screen-panel"
+              role="tabpanel"
+              aria-labelledby={`product-tab-${activeProductScreen}`}
+            >
+              <div className="product-screen-bar" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+                <small>{productScreen.title} · FontCash</small>
+              </div>
+              <img
+                src={productScreen.image}
+                alt={productScreen.alt}
+                key={productScreen.image}
+              />
+            </div>
+            <div
+              className="product-screen-tabs"
+              role="tablist"
+              aria-label="Telas do sistema FontCash"
+            >
+              {productScreens.map((screen, index) => (
+                <button
+                  type="button"
+                  role="tab"
+                  id={`product-tab-${index}`}
+                  aria-controls="product-screen-panel"
+                  aria-selected={index === activeProductScreen}
+                  className={index === activeProductScreen ? "active" : ""}
+                  onClick={() => setActiveProductScreen(index)}
+                  key={screen.title}
+                >
+                  <span>0{index + 1}</span>
+                  {screen.title}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="product-preview-copy">
+            <div className="eyebrow">O sistema na prática</div>
+            <h2 id="product-preview-title">
+              Acompanhe a operação em uma <span>visão centralizada.</span>
+            </h2>
+            <p className="product-screen-label">{productScreen.title}</p>
+            <p className="lead">{productScreen.description}</p>
+            <Link href="/contato" className="text-link">
+              Conhecer o FontCash <ArrowRight />
+            </Link>
+          </div>
         </div>
       </section>
 
