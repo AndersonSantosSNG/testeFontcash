@@ -8,8 +8,8 @@
   --line: #dce4e3;
   --paper: #f7faf8;
   --orange: #ff6b00;
-  --blue: #24608f;
-  --dark: #092d3e;
+  --blue: #295f92;
+  --dark: #295f92;
   --soft: #eaf3f4;
   color-scheme: light;
 }
@@ -1614,8 +1614,8 @@ body > main {
   --line: #d7dfdf;
   --paper: #f7f9f8;
   --orange: #f4680b;
-  --blue: #1f5b82;
-  --dark: #0b3141;
+  --blue: #295f92;
+  --dark: #295f92;
   --soft: #eaf1f1;
 }
 body {
@@ -1666,7 +1666,7 @@ body {
 .hero {
   min-height: calc(100dvh - 76px);
   padding: 64px 0;
-  background: #0b3141;
+  background: #285987;
 }
 .hero-grid {
   grid-template-columns: 1.08fr 0.92fr;
@@ -2550,7 +2550,7 @@ body {
 /* Compact, brand-aligned footer. */
 .site-footer {
   padding-top: 42px;
-  background: #0b3141;
+  background: #295f92;
   color: #b9ced1;
 }
 .footer-grid {
@@ -3286,7 +3286,7 @@ body {
   width: auto;
   padding: 24px;
   color: #fff;
-  background: #123f50;
+  background: rgba(0, 0, 0, 0.2);
   border: 1px solid #306171;
   border-radius: 8px;
 }
