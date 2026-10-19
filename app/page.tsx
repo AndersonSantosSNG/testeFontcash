@@ -159,9 +159,8 @@ export default function Page() {
   const [testimonialIndex, setTestimonialIndex] = useState(0);
   const [activeFlowStep, setActiveFlowStep] = useState(0);
   const [activeProductScreen, setActiveProductScreen] = useState(0);
-  const [loadedProductScreens, setLoadedProductScreens] = useState(0);
+  const [productScreensReady, setProductScreensReady] = useState(false);
   const productScreen = productScreens[activeProductScreen];
-  const productScreensReady = loadedProductScreens >= productScreens.length;
 
   const centerCard = useCallback(
     (physicalIndex: number, behavior: ScrollBehavior = "smooth") => {
@@ -243,6 +242,28 @@ export default function Page() {
       2500,
     );
     return () => window.clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    let active = true;
+    const preload = productScreens.map(
+      (screen) =>
+        new Promise<void>((resolve) => {
+          const image = new Image();
+          image.onload = () => resolve();
+          image.onerror = () => resolve();
+          image.src = screen.image;
+          if (image.complete) resolve();
+        }),
+    );
+
+    Promise.all(preload).then(() => {
+      if (active) setProductScreensReady(true);
+    });
+
+    return () => {
+      active = false;
+    };
   }, []);
 
   return (
@@ -437,11 +458,6 @@ export default function Page() {
                     loading="eager"
                     fetchPriority="high"
                     decoding="async"
-                    onLoad={() =>
-                      setLoadedProductScreens((loaded) =>
-                        Math.min(loaded + 1, productScreens.length),
-                      )
-                    }
                     key={screen.image}
                   />
                 ))}
