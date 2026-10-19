@@ -228,6 +228,27 @@ export default function Page() {
     setCarouselTimerReset((reset) => reset + 1);
   };
 
+  const selectTestimonialCard = (physicalIndex: number) => {
+    const total = testimonials.length;
+    const logicalIndex = physicalIndex % total;
+
+    window.clearTimeout(carouselResetTimer.current);
+    physicalTestimonialIndex.current = physicalIndex;
+    setTestimonialIndex(logicalIndex);
+    centerCard(physicalIndex);
+    setCarouselTimerReset((reset) => reset + 1);
+
+    carouselResetTimer.current = window.setTimeout(() => {
+      let normalized = physicalIndex;
+      if (physicalIndex < total) normalized += total;
+      if (physicalIndex >= total * 2) normalized -= total;
+      if (normalized !== physicalIndex) {
+        physicalTestimonialIndex.current = normalized;
+        centerCard(normalized, "auto");
+      }
+    }, 650);
+  };
+
   useEffect(() => {
     const initialFrame = window.requestAnimationFrame(() =>
       centerCard(testimonials.length, "auto"),
@@ -566,6 +587,16 @@ export default function Page() {
                 aria-current={
                   logicalIndex === testimonialIndex ? "true" : undefined
                 }
+                aria-pressed={logicalIndex === testimonialIndex}
+                role="button"
+                tabIndex={0}
+                onClick={() => selectTestimonialCard(index)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    selectTestimonialCard(index);
+                  }
+                }}
                 key={`${testimonial.role}-${index}`}
               >
                 <div className="testimonial-topline">

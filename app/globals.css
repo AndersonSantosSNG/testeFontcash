@@ -2986,6 +2986,7 @@ body {
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 8px;
+  cursor: pointer;
   scroll-snap-align: center;
   transition: border-color 0.2s ease, transform 0.2s ease;
 }
@@ -3001,6 +3002,10 @@ body {
 }
 .testimonial-card.active .testimonial-avatar {
   background: var(--orange);
+}
+.testimonial-card:focus-visible {
+  outline: 3px solid rgba(244, 104, 11, 0.35);
+  outline-offset: 3px;
 }
 .testimonial-topline {
   display: grid;
