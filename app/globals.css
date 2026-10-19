@@ -2719,21 +2719,57 @@ body {
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
-.product-screen img {
+.product-screen-stage {
+  position: relative;
+  aspect-ratio: 1897 / 897;
+  overflow: hidden;
+  background: #eef2f3;
+}
+.product-screen-stage::after {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    #eef2f3 20%,
+    #f8faf9 42%,
+    #eef2f3 64%
+  );
+  background-size: 220% 100%;
+  content: "";
+  animation: product-loading 1.2s linear infinite;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+.product-gallery.ready .product-screen-stage::after {
+  opacity: 0;
+  visibility: hidden;
+}
+@keyframes product-loading {
+  to {
+    background-position: -220% 0;
+  }
+}
+.product-screen-stage img {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
-  height: auto;
-  animation: product-screen-enter 0.38s ease both;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.995);
+  transition:
+    opacity 0.28s ease,
+    transform 0.38s ease,
+    visibility 0s linear 0.38s;
 }
-@keyframes product-screen-enter {
-  from {
-    opacity: 0;
-    transform: scale(0.992);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.product-gallery.ready .product-screen-stage img.active {
+  z-index: 1;
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  transition-delay: 0s;
 }
 .product-screen-tabs {
   display: grid;
@@ -2776,6 +2812,10 @@ body {
 }
 .product-screen-tabs button.active span {
   color: #8db2ba;
+}
+.product-screen-tabs button:disabled {
+  cursor: wait;
+  opacity: 0.58;
 }
 .product-screen-label {
   margin: 25px 0 -14px;

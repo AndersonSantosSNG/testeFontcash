@@ -159,7 +159,9 @@ export default function Page() {
   const [testimonialIndex, setTestimonialIndex] = useState(0);
   const [activeFlowStep, setActiveFlowStep] = useState(0);
   const [activeProductScreen, setActiveProductScreen] = useState(0);
+  const [loadedProductScreens, setLoadedProductScreens] = useState(0);
   const productScreen = productScreens[activeProductScreen];
+  const productScreensReady = loadedProductScreens >= productScreens.length;
 
   const centerCard = useCallback(
     (physicalIndex: number, behavior: ScrollBehavior = "smooth") => {
@@ -411,12 +413,13 @@ export default function Page() {
 
       <section className="product-preview-section" aria-labelledby="product-preview-title">
         <div className="container product-preview">
-          <div className="product-gallery">
+          <div className={productScreensReady ? "product-gallery ready" : "product-gallery"}>
             <div
               className="product-screen"
               id="product-screen-panel"
               role="tabpanel"
               aria-labelledby={`product-tab-${activeProductScreen}`}
+              aria-busy={!productScreensReady}
             >
               <div className="product-screen-bar" aria-hidden="true">
                 <span />
@@ -424,11 +427,25 @@ export default function Page() {
                 <span />
                 <small>{productScreen.title} · FontCash</small>
               </div>
-              <img
-                src={productScreen.image}
-                alt={productScreen.alt}
-                key={productScreen.image}
-              />
+              <div className="product-screen-stage">
+                {productScreens.map((screen, index) => (
+                  <img
+                    src={screen.image}
+                    alt={index === activeProductScreen ? screen.alt : ""}
+                    className={index === activeProductScreen ? "active" : ""}
+                    aria-hidden={index !== activeProductScreen}
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
+                    onLoad={() =>
+                      setLoadedProductScreens((loaded) =>
+                        Math.min(loaded + 1, productScreens.length),
+                      )
+                    }
+                    key={screen.image}
+                  />
+                ))}
+              </div>
             </div>
             <div
               className="product-screen-tabs"
@@ -444,6 +461,7 @@ export default function Page() {
                   aria-selected={index === activeProductScreen}
                   className={index === activeProductScreen ? "active" : ""}
                   onClick={() => setActiveProductScreen(index)}
+                  disabled={!productScreensReady}
                   key={screen.title}
                 >
                   <span>0{index + 1}</span>
