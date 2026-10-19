@@ -1,8 +1,15 @@
 import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
+import { Saira } from "next/font/google";
 import SiteHeader from "../components/SiteHeader";
 import SiteFooter from "../components/SiteFooter";
 import "./globals.css";
+
+const saira = Saira({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-saira",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -28,8 +35,8 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR">
-      <body style={{ fontFamily: "Arial, Helvetica, sans-serif" }}>
+    <html lang="pt-BR" className={saira.variable}>
+      <body>
         <SiteHeader />
         {children}
         <SiteFooter />
