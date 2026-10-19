@@ -1,13 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
   CheckCircle2,
+  ChevronLeft,
   ChevronRight,
   GitBranch,
   Landmark,
+  Quote,
   ShieldCheck,
+  Star,
 } from "lucide-react";
 
 const logo = "/images/logo-font-cash.png";
@@ -39,7 +43,116 @@ const problems = [
   ],
 ];
 
+const testimonials = [
+  {
+    role: "Liderança financeira",
+    company: "Empresa de serviços",
+    text: "A leitura do fechamento ficou mais clara: cada valor pode ser acompanhado desde a origem até a conciliação.",
+  },
+  {
+    role: "Gestão comercial",
+    company: "Operação multicanal",
+    text: "As regras deixaram de depender de controles paralelos e passaram a seguir um fluxo único de validação.",
+  },
+  {
+    role: "Controladoria",
+    company: "Operação com comissões",
+    text: "O histórico das regras facilita a conferência e reduz o tempo gasto para explicar ajustes de períodos anteriores.",
+  },
+  {
+    role: "Operações",
+    company: "Rede de parceiros",
+    text: "Com a trilha de cálculo, o time consegue localizar divergências e responder às áreas envolvidas com mais agilidade.",
+  },
+  {
+    role: "Administração",
+    company: "Negócio em expansão",
+    text: "A automação trouxe uma base mais segura para crescer sem aumentar a complexidade do fechamento manual.",
+  },
+];
+
+const carouselTestimonials = [
+  ...testimonials,
+  ...testimonials,
+  ...testimonials,
+];
+
 export default function Page() {
+  const testimonialsTrack = useRef<HTMLDivElement>(null);
+  const physicalTestimonialIndex = useRef(testimonials.length);
+  const carouselResetTimer = useRef<number | undefined>(undefined);
+  const [testimonialIndex, setTestimonialIndex] = useState(0);
+
+  const centerCard = useCallback(
+    (physicalIndex: number, behavior: ScrollBehavior = "smooth") => {
+      const track = testimonialsTrack.current;
+      const card = track?.children[physicalIndex] as HTMLElement | undefined;
+      if (!track || !card) return;
+
+      track.scrollTo({
+        left: card.offsetLeft + card.offsetWidth / 2 - track.clientWidth / 2,
+        behavior,
+      });
+    },
+    [],
+  );
+
+  const moveCarousel = useCallback(
+    (direction: -1 | 1) => {
+      const total = testimonials.length;
+      const nextPhysical = physicalTestimonialIndex.current + direction;
+      const nextLogical = ((nextPhysical % total) + total) % total;
+
+      window.clearTimeout(carouselResetTimer.current);
+      physicalTestimonialIndex.current = nextPhysical;
+      setTestimonialIndex(nextLogical);
+      centerCard(nextPhysical);
+
+      carouselResetTimer.current = window.setTimeout(() => {
+        let normalized = nextPhysical;
+        if (nextPhysical < total) normalized += total;
+        if (nextPhysical >= total * 2) normalized -= total;
+        if (normalized !== nextPhysical) {
+          physicalTestimonialIndex.current = normalized;
+          centerCard(normalized, "auto");
+        }
+      }, 650);
+    },
+    [centerCard],
+  );
+
+  const showTestimonial = (index: number) => {
+    const nextIndex = ((index % testimonials.length) + testimonials.length) % testimonials.length;
+    const nextPhysical = testimonials.length + nextIndex;
+
+    window.clearTimeout(carouselResetTimer.current);
+    physicalTestimonialIndex.current = nextPhysical;
+    setTestimonialIndex(nextIndex);
+    centerCard(nextPhysical);
+  };
+
+  useEffect(() => {
+    const initialFrame = window.requestAnimationFrame(() =>
+      centerCard(testimonials.length, "auto"),
+    );
+    const handleResize = () => centerCard(physicalTestimonialIndex.current, "auto");
+    window.addEventListener("resize", handleResize);
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const timer = reduceMotion
+      ? undefined
+      : window.setInterval(() => moveCarousel(1), 5500);
+
+    return () => {
+      window.cancelAnimationFrame(initialFrame);
+      window.removeEventListener("resize", handleResize);
+      window.clearTimeout(carouselResetTimer.current);
+      if (timer) window.clearInterval(timer);
+    };
+  }, [centerCard, moveCarousel]);
+
   return (
     <main className="site-shell">
       <section className="hero" id="inicio">
@@ -196,6 +309,85 @@ export default function Page() {
             src="/images/fontcash/rastreabilidade-financeira.png"
             alt="Equipe acompanhando um fluxo financeiro rastreável"
           />
+        </div>
+      </section>
+
+      <section className="testimonials-section" aria-labelledby="testimonials-title">
+        <div className="container testimonials-heading">
+          <div>
+            <div className="eyebrow">Experiência na operação</div>
+            <h2 id="testimonials-title">
+              O que muda para quem <span>usa o FontCash.</span>
+            </h2>
+          </div>
+          <div className="testimonials-intro">
+            <p>
+              Exemplos ilustrativos de feedback. Substitua pelos depoimentos
+              validados dos seus clientes antes da publicação.
+            </p>
+          </div>
+        </div>
+
+        <div className="testimonials-carousel">
+          <div className="carousel-controls" aria-label="Controles do carrossel">
+            <button
+              type="button"
+              onClick={() => moveCarousel(-1)}
+              aria-label="Depoimento anterior"
+            >
+              <ChevronLeft />
+            </button>
+            <button
+              type="button"
+              onClick={() => moveCarousel(1)}
+              aria-label="Próximo depoimento"
+            >
+              <ChevronRight />
+            </button>
+          </div>
+
+          <div
+            className="testimonials-track"
+            ref={testimonialsTrack}
+          >
+            {carouselTestimonials.map((testimonial, index) => {
+              const logicalIndex = index % testimonials.length;
+              return (
+              <article className="testimonial-card" key={`${testimonial.role}-${index}`}>
+                <div className="testimonial-topline">
+                  <div className="testimonial-avatar" aria-hidden="true">
+                    {testimonial.role.charAt(0)}
+                  </div>
+                  <div>
+                    <strong>{testimonial.role}</strong>
+                    <small>{testimonial.company}</small>
+                  </div>
+                  <Quote aria-hidden="true" />
+                </div>
+                <p>{testimonial.text}</p>
+                <div className="testimonial-rating" aria-label="5 de 5 estrelas">
+                  {[0, 1, 2, 3, 4].map((star) => (
+                    <Star key={star} fill="currentColor" aria-hidden="true" />
+                  ))}
+                </div>
+                <span className="testimonial-count">0{logicalIndex + 1}</span>
+              </article>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="carousel-dots" aria-label="Selecionar depoimento">
+          {testimonials.map((testimonial, index) => (
+            <button
+              type="button"
+              className={index === testimonialIndex ? "active" : ""}
+              onClick={() => showTestimonial(index)}
+              aria-label={`Mostrar depoimento ${index + 1}`}
+              aria-current={index === testimonialIndex ? "true" : undefined}
+              key={testimonial.role}
+            />
+          ))}
         </div>
       </section>
 
