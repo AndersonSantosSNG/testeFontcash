@@ -1666,7 +1666,8 @@ body {
 .hero {
   min-height: calc(100dvh - 76px);
   padding: 64px 0;
-  background: #234d73;
+  color: #234d73;
+  background: #eaf1f1;
 }
 .hero-grid {
   grid-template-columns: 1.08fr 0.92fr;
@@ -1681,13 +1682,14 @@ body {
   font-weight: 700;
 }
 .hero h1 span {
-  color: #fff;
+  color: #234d73;
 }
+
 .hero .lead {
   font-size: 17px;
   line-height: 1.65;
   max-width: 680px;
-  color: #c1d1d3;
+  color: #234d73;
 }
 .hero-cta {
   margin-top: 30px;
@@ -3285,25 +3287,26 @@ body {
 .trace-card {
   width: auto;
   padding: 24px;
-  color: #fff;
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid #306171;
+  color: #234d73;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid #c7d7db;
   border-radius: 8px;
+  box-shadow: 0 18px 45px rgba(35, 77, 115, 0.12);
 }
 .trace-head {
   align-items: flex-start;
   padding-bottom: 21px;
-  border-bottom-color: #3e6672;
+  border-bottom-color: #c7d7db;
 }
 .trace-head strong {
   font-size: inherit;
 }
 .trace-head small {
-  color: #93afb4;
+  color: #657174;
 }
 .trace-card .live {
   padding: 0;
-  color: #8de1a3;
+  color: #2f7a49;
   background: transparent;
   border: 0;
   border-radius: 0;
@@ -3325,7 +3328,7 @@ body {
   gap: 13px;
   padding: 14px 0;
   border: 0;
-  border-bottom: 1px solid #2b5a68;
+  border-bottom: 1px solid #d7e2e4;
 }
 .trace-card .flow-step:last-child {
   border-bottom: 0;
@@ -3352,20 +3355,20 @@ body {
   height: 15px;
 }
 .trace-card .flow-step strong {
-  color: #fff;
+  color: #234d73;
   font-size: inherit;
 }
 .trace-card .flow-step small {
   display: block;
   min-height: 0;
   margin-top: 4px;
-  color: #99b2b7;
+  color: #657174;
   font-size: 12px;
   line-height: normal;
 }
 .trace-card .flow-step > span {
   margin-top: 0;
-  color: #8caeb2;
+  color: #5d7488;
   font-size: 11px;
   font-weight: 400;
   letter-spacing: 0;
@@ -3373,7 +3376,7 @@ body {
   transition: color 0.25s ease;
 }
 .trace-card .flow-step.active > span {
-  color: #ff9b52;
+  color: var(--orange);
   font-weight: 700;
 }
 @keyframes flow-icon-pulse {
