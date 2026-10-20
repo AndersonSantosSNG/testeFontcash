@@ -1666,7 +1666,7 @@ body {
 .hero {
   min-height: calc(100dvh - 76px);
   padding: 64px 0;
-  background: #285987;
+  background: #234d73;
 }
 .hero-grid {
   grid-template-columns: 1.08fr 0.92fr;
@@ -2550,7 +2550,7 @@ body {
 /* Compact, brand-aligned footer. */
 .site-footer {
   padding-top: 42px;
-  background: #295f92;
+  background: #234d73;
   color: #b9ced1;
 }
 .footer-grid {
